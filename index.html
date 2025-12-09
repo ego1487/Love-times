@@ -156,8 +156,8 @@ h1{
     </div>
 </div>
 
-<!-- Musik Latar Langsung Auto-Play -->
-<audio id="music" autoplay loop>
+<!-- Musik Latar -->
+<audio id="music" loop>
   <source src="PenjagaHati.mp3" type="audio/mpeg">
 </audio>
 
@@ -296,6 +296,14 @@ function createHeart(x,y){
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),9000);
 }
+
+// =====================
+// AUTOPLAY MUSIK SETELAH KLIK PERTAMA
+// =====================
+const music = document.getElementById("music");
+window.addEventListener("click", ()=>{
+    music.play().catch(()=>console.log("Klik untuk mulai musik."));
+},{once:true});
 </script>
 
 </body>
