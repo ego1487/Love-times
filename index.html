@@ -22,7 +22,6 @@ body{
     animation: zoomBg 20s ease-in-out infinite alternate;
 }
 
-/* background pelan */
 @keyframes zoomBg{
     0%{background-size:110%;}
     100%{background-size:120%;}
@@ -82,6 +81,21 @@ h1{
     margin-bottom:6px;
 }
 
+/* =====================
+   QUOTES
+===================== */
+#quote{
+    font-size:14px;
+    color:#ffd6e0;
+    margin-top:8px;
+    font-style:italic;
+    opacity:0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* =====================
+   FOOTER
+===================== */
 .footer{
     margin-top:18px;
     font-size:11px;
@@ -135,15 +149,17 @@ h1{
 <div class="card">
     <div class="box">
         <h1>🩵 Our Time 🩵</h1>
-
-        <!-- ✏️ GANTI NAMA -->
         <div class="names">I 🩷 N</div>
-
         <div id="timer"></div>
-
+        <div id="quote">💌 Love you forever 💌</div>
         <div class="footer">forever &amp; always</div>
     </div>
 </div>
+
+<!-- Musik Latar Langsung Auto-Play -->
+<audio id="music" autoplay loop>
+  <source src="PenjagaHati.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 // =====================
@@ -195,6 +211,56 @@ function updateTimer(){
 }
 updateTimer();
 setInterval(updateTimer,1000);
+
+// =====================
+// QUOTES 30 PCS DENGAN FADE
+// =====================
+const quotes = [
+  "Bersamamu, aku menemukan rumah yang tak tergantikan.",
+  "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
+  "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
+  "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
+  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
+  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
+  "Bersamamu, semua hal biasa jadi luar biasa.",
+  "Cinta kita bukan hanya kata-kata, tapi juga tindakan setiap hari.",
+  "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
+  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
+  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
+  "Kamu bukan hanya milikku, tapi aku milikmu sepenuh hati.",
+  "Setiap hari bersamamu adalah hadiah yang tak ternilai.",
+  "Aku ingin menjadi alasan kamu tersenyum setiap pagi.",
+  "Cinta kita tumbuh bukan karena sempurna, tapi karena kita saling memahami.",
+  "Kamu membuat dunia ini lebih indah hanya dengan hadir di sisiku.",
+  "Aku jatuh cinta padamu lagi setiap kali kamu tersenyum padaku.",
+  "Bersamamu, aku belajar arti sabar, setia, dan mencintai tanpa syarat.",
+  "Cinta sejati adalah ketika kamu tetap memilihnya meski tahu kekurangannya.",
+  "Aku mencintaimu dalam diam, tawa, dan setiap napasku.",
+  "Bersamamu, bahkan hari-hari biasa menjadi istimewa.",
+  "Aku ingin memegang tanganmu bukan hanya hari ini, tapi selamanya.",
+  "Cinta kita bukan tentang kata-kata manis, tapi tentang momen yang kita buat bersama.",
+  "Kamu adalah alasan aku percaya pada cinta sejati.",
+  "Bersamamu, aku merasa utuh, tak ada yang kurang.",
+  "Aku memilihmu hari ini, esok, dan selamanya.",
+  "Cinta kita sederhana, tapi tak ternilai harganya.",
+  "Kamu adalah lagu indah yang tak pernah bosan aku dengar.",
+  "Aku bahagia melihatmu bahagia, karena itu membuat hatiku damai.",
+  "Bersamamu, setiap mimpi terasa mungkin."
+];
+
+let qIndex = 0;
+const quoteEl = document.getElementById("quote");
+
+function showNextQuote(){
+    quoteEl.style.opacity = 0;
+    setTimeout(()=>{
+        quoteEl.innerText = quotes[qIndex];
+        quoteEl.style.opacity = 1;
+        qIndex = (qIndex + 1) % quotes.length;
+    }, 1000);
+}
+showNextQuote();
+setInterval(showNextQuote, 5000);
 
 // =====================
 // LOVE JATUH
