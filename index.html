@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Time</title>
-<link rel="stylesheet" href="style.css"> <!-- optional -->
+
 <style>
 /* =====================
    BASE
@@ -82,7 +82,116 @@ h1{margin:0; font-size:26px; letter-spacing:2px; text-transform:uppercase;}
 </div>
 
 <!-- Musik Latar -->
-<audio id="music" loop>
+<audio id="music" preload="auto" loop>
+  <source src="penjagaHati.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// =====================
+// TIMER
+const startDate = new Date("2025-08-23T19:36:00+09:00");
+function nowWIT(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"})); }
+function updateTimer(){
+    const now = nowWIT();
+    const diff = now - startDate;
+    const t = document.getElementById("timer");
+    if(diff < 0){ t.innerHTML = "Coming soon 💙"; return; }
+    const s = new Date(startDate);
+    const e = new Date(now);
+    let y = e.getFullYear()-s.getFullYear();
+    let m = e.getMonth()-s.getMonth();
+    let d = e.getDate()-s.getDate();
+    if(d<0){ m--; d += new Date(e.getFullYear(),e.getMonth(),0).getDate(); }
+    if(m<0){ y--; m+=12; }
+    const h = Math.floor((diff/3600000)%24);
+    const mi = Math.floor((diff/60000)%60);
+    const se = Math.floor((diff/1000)%60);
+    t.innerHTML = `<span class="time-big">${y} Years ${m} Months</span>${d} Days together<br>${h} Hours ${mi} Minutes ${se} Seconds 💫`;
+}
+updateTimer(); setInterval(updateTimer,1000);
+
+// =====================
+// QUOTES
+const quotes = [
+  "Bersamamu, aku menemukan rumah yang tak tergantikan.",
+  "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
+  "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
+  "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
+  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
+  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
+  "Bersamamu, semua hal biasa jadi luar biasa.",
+  "Cinta kita bukan hanya kata-kata, tapi juga tindakan setiap hari.",
+  "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
+  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
+  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
+  "Kamu bukan hanya milikku, tapi aku milikmu sepenuh hati.",
+  "Setiap hari bersamamu adalah hadiah yang tak ternilai.",
+  "Aku ingin menjadi alasan kamu tersenyum setiap pagi.",
+  "Cinta kita tumbuh bukan karena sempurna, tapi karena kita saling memahami.",
+  "Kamu membuat dunia ini lebih indah hanya dengan hadir di sisiku.",
+  "Aku jatuh cinta padamu lagi setiap kali kamu tersenyum padaku.",
+  "Bersamamu, aku belajar arti sabar, setia, dan mencintai tanpa syarat.",
+  "Cinta sejati adalah ketika kamu tetap memilihnya meski tahu kekurangannya.",
+  "Aku mencintaimu dalam diam, tawa, dan setiap napasku.",
+  "Bersamamu, bahkan hari-hari biasa menjadi istimewa.",
+  "Aku ingin memegang tanganmu bukan hanya hari ini, tapi selamanya.",
+  "Cinta kita bukan tentang kata-kata manis, tapi tentang momen yang kita buat bersama.",
+  "Kamu adalah alasan aku percaya pada cinta sejati.",
+  "Bersamamu, aku merasa utuh, tak ada yang kurang.",
+  "Aku memilihmu hari ini, esok, dan selamanya.",
+  "Cinta kita sederhana, tapi tak ternilai harganya.",
+  "Kamu adalah lagu indah yang tak pernah bosan aku dengar.",
+  "Aku bahagia melihatmu bahagia, karena itu membuat hatiku damai.",
+  "Bersamamu, setiap mimpi terasa mungkin."
+];
+let qIndex = 0;
+const quoteEl = document.getElementById("quote");
+function showNextQuote(){
+    quoteEl.style.opacity=0;
+    setTimeout(()=>{
+        quoteEl.innerText=quotes[qIndex];
+        quoteEl.style.opacity=1;
+        qIndex=(qIndex+1)%quotes.length;
+    },1000);
+}
+showNextQuote(); setInterval(showNextQuote,5000);
+
+// =====================
+// HEART
+const colors = ["#ff5da2","#ff9f43","#feca57","#1dd1a1","#54a0ff","#5f27cd"];
+setInterval(()=>{createHeart(Math.random()*window.innerWidth,-20);},600);
+document.addEventListener("click",(e)=>{createHeart(e.clientX,e.clientY);});
+function createHeart(x,y){
+    const h=document.createElement("div");
+    h.className="heart";
+    const size=10+Math.random()*16;
+    const color=colors[Math.floor(Math.random()*colors.length)];
+    h.style.width=size+"px";
+    h.style.height=size+"px";
+    h.style.background=color;
+    h.style.color=color;
+    h.style.left=(x-size/2)+"px";
+    h.style.top=y+"px";
+    h.style.animationDuration=(5+Math.random()*4)+"s,"+(2+Math.random()*2)+"s,1.5s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),9000);
+}
+
+// =====================
+// AUTOPLAY FIX (GITHUB PAGES)
+const music = document.getElementById("music");
+music.volume = 1;
+
+function startMusic(){
+    music.play().catch(()=>{});
+}
+
+window.addEventListener("click", startMusic, { once: true });
+window.addEventListener("touchstart", startMusic, { once: true });
+</script>
+
+</body>
+</html><audio id="music" loop>
   <source src="PenjagaHati.mp3" type="audio/mpeg">
 </audio>
 
