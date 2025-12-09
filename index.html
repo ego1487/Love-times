@@ -1,783 +1,436 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Time</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Our Time — I 🩷 N</title>
 <style>
-/* =====================
-   BASE
-===================== */
+/* ===================== CLEAN MINIMAL PASTEL (Blue-Pink) ===================== */
+:root{
+  --bg1: #0b1220;        /* deep base */
+  --glass: rgba(255,255,255,0.06);
+  --card-blur: 14px;
+  --accent-pink: #ff7bb0;
+  --accent-lite: #8fd3ff;
+  --muted: rgba(255,255,255,0.78);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased;}
 body{
-    margin:0;
-    min-height:100vh;
-    font-family:"Segoe UI",Arial,sans-serif;
-    color:#fff;
-    overflow:hidden;
-    background:
-        linear-gradient(rgba(0,0,30,.65),rgba(0,0,30,.65)),
-        url("bg.jpg") center/110% no-repeat fixed;
-    animation: zoomBg 20s ease-in-out infinite alternate, fadeIn 2s ease;
-}
-@keyframes zoomBg{0%{background-size:110%;}100%{background-size:120%;}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-
-/* Romantic ambient glow */
-body::after {
-    content:"";
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(255,150,200,0.25), transparent 60%),
-      radial-gradient(circle at 70% 60%, rgba(120,180,255,0.25), transparent 60%);
-    z-index:-1;
+  background:
+    radial-gradient(1200px 600px at 80% 10%, rgba(143,211,255,0.06), transparent 20%),
+    radial-gradient(900px 500px at 10% 90%, rgba(255,123,176,0.04), transparent 20%),
+    linear-gradient(180deg,#071028 0%, #081422 100%);
+  color:var(--muted);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
-/* =====================
-   CARD
-===================== */
-.card{min-height:100vh; display:grid; place-items:center;}
-.box{
-    width:min(92%,360px);
-    padding:32px 26px;
-    border-radius:22px;
-    text-align:center;
-    background:rgba(0,0,0,.35);
-    backdrop-filter:blur(18px);
-    animation:pulse 3s ease-in-out infinite, softBeat 4s ease-in-out infinite;
-    box-shadow:0 0 45px rgba(120,190,255,.35);
-}
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
-@keyframes softBeat{
-    0%,100% { box-shadow: 0 0 25px rgba(255,170,200,0.4); }
-    50% { box-shadow: 0 0 45px rgba(255,170,200,0.75); }
+/* CENTER CARD */
+.container{width:min(920px,94%); display:flex; align-items:center; justify-content:center; padding:28px;}
+.card{
+  width: min(760px, 100%);
+  max-width:720px;
+  border-radius:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  box-shadow: 0 10px 30px rgba(4,10,20,0.6), 0 2px 6px rgba(0,0,0,0.4);
+  backdrop-filter: blur(var(--card-blur));
+  padding:28px;
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:14px;
+  position:relative;
+  overflow:clip;
 }
 
-h1{margin:0; font-size:26px; letter-spacing:2px; text-transform:uppercase;}
-.names{font-size:15px; margin:10px 0 16px; color:#d6ecff;}
-
-/* =====================
-   TIMER
-===================== */
-#timer{font-size:18px; line-height:1.6;}
-.time-big{display:block; font-size:28px; font-weight:700; color:#8fd3ff; margin-bottom:6px;}
-
-/* =====================
-   QUOTES
-===================== */
-#quote{font-size:14px; color:#ffd6e0; margin-top:8px; font-style:italic; opacity:0; transition: opacity 1s ease-in-out;}
-
-/* =====================
-   FOOTER
-===================== */
-.footer{margin-top:18px; font-size:11px; color:#e0f3ff; letter-spacing:1px;}
-
-/* =====================
-   HEART
-===================== */
-.heart{position:fixed; top:-30px; transform:rotate(45deg); opacity:.9;
-    animation:fall linear forwards, sway ease-in-out infinite, glow ease-in-out infinite; pointer-events:none;}
-.heart::before,.heart::after{content:""; position:absolute; width:100%; height:100%; background:inherit; border-radius:50%;}
-.heart::before{left:-50%;} .heart::after{top:-50%;}
-@keyframes fall{to{transform:translateY(120vh) rotate(45deg);opacity:0;}}
-@keyframes sway{0%,100%{margin-left:-12px;}50%{margin-left:12px;}}
-@keyframes glow{0%,100%{box-shadow:0 0 6px currentColor;}50%{box-shadow:0 0 18px currentColor;}}
-
-/* =====================
-   SPARKLES
-===================== */
-.sparkle {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: sparkleAnim 2s linear forwards;
-    pointer-events: none;
+/* header */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
 }
-@keyframes sparkleAnim {
-    0% { transform: scale(0.5); opacity: 1; }
-    100% { transform: scale(1.8); opacity: 0; }
+.title{display:flex; align-items:center; gap:12px}
+.title h1{
+  margin:0; font-size:16px; color: #dff6ff; letter-spacing:1px; text-transform:uppercase;
 }
-</style>
-</head>
+.small-sub{font-size:12px; color: rgba(255,255,255,0.55)}
 
-<body>
-
-<div class="card">
-    <div class="box">
-        <h1>🩵 Our Time 🩵</h1>
-        <div class="names">I 🩷 N</div>
-        <div id="timer"></div>
-        <div id="quote">💌 Love you forever 💌</div>
-        <div class="footer">forever &amp; always</div>
-    </div>
-</div>
-
-<!-- Musik -->
-<audio id="music" preload="auto" loop>
-  <source src="penjagaHati.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-// =====================
-// TIMER
-const startDate = new Date("2025-08-23T19:36:00+09:00");
-function nowWIT(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"})); }
-function updateTimer(){
-    const now = nowWIT();
-    const diff = now - startDate;
-    const t = document.getElementById("timer");
-    if(diff < 0){ t.innerHTML = "Coming soon 💙"; return; }
-    const s = new Date(startDate);
-    const e = new Date(now);
-    let y = e.getFullYear()-s.getFullYear();
-    let m = e.getMonth()-s.getMonth();
-    let d = e.getDate()-s.getDate();
-    if(d<0){ m--; d += new Date(e.getFullYear(),e.getMonth(),0).getDate(); }
-    if(m<0){ y--; m+=12; }
-    const h = Math.floor((diff/3600000)%24);
-    const mi = Math.floor((diff/60000)%60);
-    const se = Math.floor((diff/1000)%60);
-    t.innerHTML = `<span class="time-big">${y} Years ${m} Months</span>${d} Days together<br>${h} Hours ${mi} Minutes ${se} Seconds 💫`;
+/* NEON NAME (heartbeat) */
+.names{
+  margin:4px 0 0;
+  font-size:28px;
+  font-weight:700;
+  text-align:center;
+  color: var(--accent-pink);
+  letter-spacing:2px;
+  line-height:1;
+  text-shadow:
+    0 0 6px rgba(255,123,176,0.9),
+    0 0 12px rgba(255,80,140,0.6),
+    0 0 28px rgba(255,40,120,0.18);
+  transform-origin:center;
+  animation: heartbeat 1.8s ease-in-out infinite;
+  user-select:none;
 }
-updateTimer(); setInterval(updateTimer,1000);
-
-// =====================
-// QUOTES
-const quotes = [
-  "Bersamamu, aku menemukan rumah yang tak tergantikan.",
-  "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
-  "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
-  "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
-  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
-  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
-  "Bersamamu, semua hal biasa jadi luar biasa.",
-  "Cinta kita bukan hanya kata-kata, tapi juga tindakan setiap hari.",
-  "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
-  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
-  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
-  "Kamu bukan hanya milikku, tapi aku milikmu sepenuh hati.",
-  "Setiap hari bersamamu adalah hadiah yang tak ternilai.",
-  "Aku ingin menjadi alasan kamu tersenyum setiap pagi.",
-  "Cinta kita tumbuh karena saling memahami.",
-];
-let qIndex = 0;
-const quoteEl = document.getElementById("quote");
-function showNextQuote(){
-    quoteEl.style.opacity=0;
-    setTimeout(()=>{
-        quoteEl.innerText=quotes[qIndex];
-        quoteEl.style.opacity=1;
-        qIndex=(qIndex+1)%quotes.length;
-    },1000);
-}
-showNextQuote(); setInterval(showNextQuote,5000);
-
-// =====================
-// HEART
-const colors = ["#ff5da2","#ff9f43","#feca57","#1dd1a1","#54a0ff","#5f27cd"];
-setInterval(()=>{createHeart(Math.random()*window.innerWidth,-20);},600);
-document.addEventListener("click",(e)=>{createHeart(e.clientX,e.clientY);});
-function createHeart(x,y){
-    const h=document.createElement("div");
-    h.className="heart";
-    const size=10+Math.random()*16;
-    const color=colors[Math.floor(Math.random()*colors.length)];
-    h.style.width=size+"px";
-    h.style.height=size+"px";
-    h.style.background=color;
-    h.style.color=color;
-    h.style.left=(x-size/2)+"px";
-    h.style.top=y+"px";
-    h.style.animationDuration=(5+Math.random()*4)+"s,"+(2+Math.random()*2)+"s,1.5s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),9000);
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  12%{transform:scale(1.06)}
+  24%{transform:scale(.98)}
+  40%{transform:scale(1.08)}
+  60%{transform:scale(1)}
 }
 
-// =====================
-// SPARKLES
-setInterval(() => {
-    const s = document.createElement("div");
-    s.className = "sparkle";
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-    s.style.left = x + "px";
-    s.style.top = y + "px";
-    document.body.appendChild(s);
-    setTimeout(() => s.remove(), 2000);
-}, 800);
-
-// =====================
-// AUTOPLAY FIX
-const music = document.getElementById("music");
-music.volume = 1;
-
-function startMusic(){
-    music.play().catch(()=>{});
+/* main timer block */
+.main{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  padding:10px 6px 18px 6px;
 }
-window.addEventListener("click", startMusic, { once:true });
-window.addEventListener("touchstart", startMusic, { once:true });
-
-</script>
-
-</body>
-</html>@keyframes sway{0%,100%{margin-left:-12px;}50%{margin-left:12px;}}
-@keyframes glow{0%,100%{box-shadow:0 0 6px currentColor;}50%{box-shadow:0 0 18px currentColor;}}
-
-/* =====================
-   SPARKLES
-===================== */
-.sparkle {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: sparkleAnim 2s linear forwards;
-    pointer-events: none;
+.timer{
+  font-size:18px;
+  color:#dff6ff;
+  text-align:center;
 }
-@keyframes sparkleAnim {
-    0% { transform: scale(0.5); opacity: 1; }
-    100% { transform: scale(1.8); opacity: 0; }
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-    <div class="box">
-        <h1>🩵 Our Time 🩵</h1>
-        <div class="names">I 🩷 N</div>
-        <div id="timer"></div>
-        <div id="quote">💌 Love you forever 💌</div>
-        <div class="footer">forever &amp; always</div>
-    </div>
-</div>
-
-<!-- Musik -->
-<audio id="music" preload="auto" loop>
-  <source src="penjagaHati.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-// =====================
-// TIMER
-const startDate = new Date("2025-08-23T19:36:00+09:00");
-function nowWIT(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"})); }
-function updateTimer(){
-    const now = nowWIT();
-    const diff = now - startDate;
-    const t = document.getElementById("timer");
-    if(diff < 0){ t.innerHTML = "Coming soon 💙"; return; }
-    const s = new Date(startDate);
-    const e = new Date(now);
-    let y = e.getFullYear()-s.getFullYear();
-    let m = e.getMonth()-s.getMonth();
-    let d = e.getDate()-s.getDate();
-    if(d<0){ m--; d += new Date(e.getFullYear(),e.getMonth(),0).getDate(); }
-    if(m<0){ y--; m+=12; }
-    const h = Math.floor((diff/3600000)%24);
-    const mi = Math.floor((diff/60000)%60);
-    const se = Math.floor((diff/1000)%60);
-    t.innerHTML = `<span class="time-big">${y} Years ${m} Months</span>${d} Days together<br>${h} Hours ${mi} Minutes ${se} Seconds 💫`;
-}
-updateTimer(); setInterval(updateTimer,1000);
-
-// =====================
-// QUOTES
-const quotes = [
-  "Bersamamu, aku menemukan rumah yang tak tergantikan.",
-  "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
-  "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
-  "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
-  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
-  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
-  "Bersamamu, semua hal biasa jadi luar biasa.",
-  "Cinta kita bukan hanya kata-kata, tapi juga tindakan setiap hari.",
-  "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
-  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
-  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
-  "Kamu bukan hanya milikku, tapi aku milikmu sepenuh hati.",
-  "Setiap hari bersamamu adalah hadiah yang tak ternilai.",
-  "Aku ingin menjadi alasan kamu tersenyum setiap pagi.",
-  "Cinta kita tumbuh karena saling memahami.",
-];
-let qIndex = 0;
-const quoteEl = document.getElementById("quote");
-function showNextQuote(){
-    quoteEl.style.opacity=0;
-    setTimeout(()=>{
-        quoteEl.innerText=quotes[qIndex];
-        quoteEl.style.opacity=1;
-        qIndex=(qIndex+1)%quotes.length;
-    },1000);
-}
-showNextQuote(); setInterval(showNextQuote,5000);
-
-// =====================
-// HEART
-const colors = ["#ff5da2","#ff9f43","#feca57","#1dd1a1","#54a0ff","#5f27cd"];
-setInterval(()=>{createHeart(Math.random()*window.innerWidth,-20);},600);
-document.addEventListener("click",(e)=>{createHeart(e.clientX,e.clientY);});
-function createHeart(x,y){
-    const h=document.createElement("div");
-    h.className="heart";
-    const size=10+Math.random()*16;
-    const color=colors[Math.floor(Math.random()*colors.length)];
-    h.style.width=size+"px";
-    h.style.height=size+"px";
-    h.style.background=color;
-    h.style.color=color;
-    h.style.left=(x-size/2)+"px";
-    h.style.top=y+"px";
-    h.style.animationDuration=(5+Math.random()*4)+"s,"+(2+Math.random()*2)+"s,1.5s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),9000);
+.time-big{
+  display:block; font-size:34px; font-weight:800; color: var(--accent-lite); margin-bottom:6px;
+  letter-spacing:1px;
 }
 
-// =====================
-// SPARKLES
-setInterval(() => {
-    const s = document.createElement("div");
-    s.className = "sparkle";
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-    s.style.left = x + "px";
-    s.style.top = y + "px";
-    document.body.appendChild(s);
-    setTimeout(() => s.remove(), 2000);
-}, 800);
+/* quotes */
+#quote{font-size:14px; color: rgba(255,220,230,0.95); font-style:italic; opacity:0; transition:opacity .9s ease; text-align:center; max-width:85%; margin:0 auto;}
 
-// =====================
-// AUTOPLAY FIX
-const music = document.getElementById("music");
-music.volume = 1;
+/* footer small */
+.footer{display:flex; justify-content:center; font-size:12px; color:rgba(255,255,255,0.6); gap:8px;}
 
-function startMusic(){
-    music.play().catch(()=>{});
+/* subtle divider + extra controls row */
+.controls{display:flex; gap:8px; justify-content:center; margin-top:6px;}
+.btn{
+  padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color:var(--muted); font-size:13px; cursor:pointer;
+  backdrop-filter: blur(6px);
 }
-window.addEventListener("click", startMusic, { once:true });
-window.addEventListener("touchstart", startMusic, { once:true });
+.btn:active{transform:translateY(1px)}
 
-</script>
-
-</body>
-</html>// =====================
-// TIMER
-const startDate = new Date("2025-08-23T19:36:00+09:00");
-function nowWIT(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"})); }
-function updateTimer(){
-    const now = nowWIT();
-    const diff = now - startDate;
-    const t = document.getElementById("timer");
-    if(diff < 0){ t.innerHTML = "Coming soon 💙"; return; }
-    const s = new Date(startDate);
-    const e = new Date(now);
-    let y = e.getFullYear()-s.getFullYear();
-    let m = e.getMonth()-s.getMonth();
-    let d = e.getDate()-s.getDate();
-    if(d<0){ m--; d += new Date(e.getFullYear(),e.getMonth(),0).getDate(); }
-    if(m<0){ y--; m+=12; }
-    const h = Math.floor((diff/3600000)%24);
-    const mi = Math.floor((diff/60000)%60);
-    const se = Math.floor((diff/1000)%60);
-    t.innerHTML = `<span class="time-big">${y} Years ${m} Months</span>${d} Days together<br>${h} Hours ${mi} Minutes ${se} Seconds 💫`;
-}
-updateTimer(); setInterval(updateTimer,1000);
-
-// =====================
-// QUOTES
-const quotes = [
-  "Bersamamu, aku menemukan rumah yang tak tergantikan.",
-  "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
-  "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
-  "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
-  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
-  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
-  "Bersamamu, semua hal biasa jadi luar biasa.",
-  "Cinta kita bukan hanya kata-kata, tapi juga tindakan setiap hari.",
-  "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
-  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
-  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
-  "Kamu bukan hanya milikku, tapi aku milikmu sepenuh hati.",
-  "Setiap hari bersamamu adalah hadiah yang tak ternilai.",
-  "Aku ingin menjadi alasan kamu tersenyum setiap pagi.",
-  "Cinta kita tumbuh bukan karena sempurna, tapi karena kita saling memahami.",
-  "Kamu membuat dunia ini lebih indah hanya dengan hadir di sisiku.",
-  "Aku jatuh cinta padamu lagi setiap kali kamu tersenyum padaku.",
-  "Bersamamu, aku belajar arti sabar, setia, dan mencintai tanpa syarat.",
-  "Cinta sejati adalah ketika kamu tetap memilihnya meski tahu kekurangannya.",
-  "Aku mencintaimu dalam diam, tawa, dan setiap napasku.",
-  "Bersamamu, bahkan hari-hari biasa menjadi istimewa.",
-  "Aku ingin memegang tanganmu bukan hanya hari ini, tapi selamanya.",
-  "Cinta kita bukan tentang kata-kata manis, tapi tentang momen yang kita buat bersama.",
-  "Kamu adalah alasan aku percaya pada cinta sejati.",
-  "Bersamamu, aku merasa utuh, tak ada yang kurang.",
-  "Aku memilihmu hari ini, esok, dan selamanya.",
-  "Cinta kita sederhana, tapi tak ternilai harganya.",
-  "Kamu adalah lagu indah yang tak pernah bosan aku dengar.",
-  "Aku bahagia melihatmu bahagia, karena itu membuat hatiku damai.",
-  "Bersamamu, setiap mimpi terasa mungkin."
-];
-let qIndex = 0;
-const quoteEl = document.getElementById("quote");
-function showNextQuote(){
-    quoteEl.style.opacity=0;
-    setTimeout(()=>{
-        quoteEl.innerText=quotes[qIndex];
-        quoteEl.style.opacity=1;
-        qIndex=(qIndex+1)%quotes.length;
-    },1000);
-}
-showNextQuote(); setInterval(showNextQuote,5000);
-
-// =====================
-// HEART
-const colors = ["#ff5da2","#ff9f43","#feca57","#1dd1a1","#54a0ff","#5f27cd"];
-setInterval(()=>{createHeart(Math.random()*window.innerWidth,-20);},600);
-document.addEventListener("click",(e)=>{createHeart(e.clientX,e.clientY);});
-function createHeart(x,y){
-    const h=document.createElement("div");
-    h.className="heart";
-    const size=10+Math.random()*16;
-    const color=colors[Math.floor(Math.random()*colors.length)];
-    h.style.width=size+"px";
-    h.style.height=size+"px";
-    h.style.background=color;
-    h.style.color=color;
-    h.style.left=(x-size/2)+"px";
-    h.style.top=y+"px";
-    h.style.animationDuration=(5+Math.random()*4)+"s,"+(2+Math.random()*2)+"s,1.5s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),9000);
-}
-
-// =====================
-// AUTOPLAY FIX (GITHUB PAGES)
-const music = document.getElementById("music");
-music.volume = 1;
-
-function startMusic(){
-    music.play().catch(()=>{});
-}
-
-window.addEventListener("click", startMusic, { once: true });
-window.addEventListener("touchstart", startMusic, { once: true });
-</script>
-
-</body>
-</html><audio id="music" loop>
-  <source src="PenjagaHati.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-// =====================
-// TIMER
-const startDate = new Date("2025-08-23T19:36:00+09:00");
-function nowWIT(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"})); }
-function updateTimer(){
-    const now = nowWIT();
-    const diff = now - startDate;
-    const t = document.getElementById("timer");
-    if(diff < 0){ t.innerHTML = "Coming soon 💙"; return; }
-    const s = new Date(startDate);
-    const e = new Date(now);
-    let y = e.getFullYear()-s.getFullYear();
-    let m = e.getMonth()-s.getMonth();
-    let d = e.getDate()-s.getDate();
-    if(d<0){ m--; d += new Date(e.getFullYear(),e.getMonth(),0).getDate(); }
-    if(m<0){ y--; m+=12; }
-    const h = Math.floor((diff/3600000)%24);
-    const mi = Math.floor((diff/60000)%60);
-    const se = Math.floor((diff/1000)%60);
-    t.innerHTML = `<span class="time-big">${y} Years ${m} Months</span>${d} Days together<br>${h} Hours ${mi} Minutes ${se} Seconds 💫`;
-}
-updateTimer(); setInterval(updateTimer,1000);
-
-// =====================
-// QUOTES
-const quotes = [
-  "Bersamamu, aku menemukan rumah yang tak tergantikan.",
-  "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
-  "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
-  "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
-  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
-  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
-  "Bersamamu, semua hal biasa jadi luar biasa.",
-  "Cinta kita bukan hanya kata-kata, tapi juga tindakan setiap hari.",
-  "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
-  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
-  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
-  "Kamu bukan hanya milikku, tapi aku milikmu sepenuh hati.",
-  "Setiap hari bersamamu adalah hadiah yang tak ternilai.",
-  "Aku ingin menjadi alasan kamu tersenyum setiap pagi.",
-  "Cinta kita tumbuh bukan karena sempurna, tapi karena kita saling memahami.",
-  "Kamu membuat dunia ini lebih indah hanya dengan hadir di sisiku.",
-  "Aku jatuh cinta padamu lagi setiap kali kamu tersenyum padaku.",
-  "Bersamamu, aku belajar arti sabar, setia, dan mencintai tanpa syarat.",
-  "Cinta sejati adalah ketika kamu tetap memilihnya meski tahu kekurangannya.",
-  "Aku mencintaimu dalam diam, tawa, dan setiap napasku.",
-  "Bersamamu, bahkan hari-hari biasa menjadi istimewa.",
-  "Aku ingin memegang tanganmu bukan hanya hari ini, tapi selamanya.",
-  "Cinta kita bukan tentang kata-kata manis, tapi tentang momen yang kita buat bersama.",
-  "Kamu adalah alasan aku percaya pada cinta sejati.",
-  "Bersamamu, aku merasa utuh, tak ada yang kurang.",
-  "Aku memilihmu hari ini, esok, dan selamanya.",
-  "Cinta kita sederhana, tapi tak ternilai harganya.",
-  "Kamu adalah lagu indah yang tak pernah bosan aku dengar.",
-  "Aku bahagia melihatmu bahagia, karena itu membuat hatiku damai.",
-  "Bersamamu, setiap mimpi terasa mungkin."
-];
-let qIndex = 0;
-const quoteEl = document.getElementById("quote");
-function showNextQuote(){ quoteEl.style.opacity=0; setTimeout(()=>{quoteEl.innerText=quotes[qIndex]; quoteEl.style.opacity=1; qIndex=(qIndex+1)%quotes.length; },1000);}
-showNextQuote(); setInterval(showNextQuote,5000);
-
-// =====================
-// HEART
-const colors = ["#ff5da2","#ff9f43","#feca57","#1dd1a1","#54a0ff","#5f27cd"];
-setInterval(()=>{createHeart(Math.random()*window.innerWidth,-20);},600);
-document.addEventListener("click",(e)=>{createHeart(e.clientX,e.clientY);});
-function createHeart(x,y){const h=document.createElement("div");h.className="heart";const size=10+Math.random()*16;const color=colors[Math.floor(Math.random()*colors.length)];h.style.width=size+"px";h.style.height=size+"px";h.style.background=color;h.style.color=color;h.style.left=(x-size/2)+"px";h.style.top=y+"px";h.style.animationDuration=(5+Math.random()*4)+"s,"+(2+Math.random()*2)+"s,1.5s";document.body.appendChild(h);setTimeout(()=>h.remove(),9000);}
-
-// =====================
-// AUTOPLAY MUSIK SETELAH KLIK PERTAMA
-const music = document.getElementById("music");
-window.addEventListener("click",()=>{
-    music.play().catch(()=>console.log("Klik untuk mulai musik"));
-},{once:true});
-</script>
-
-</body>
-</html>   QUOTES
-===================== */
-#quote{
-    font-size:14px;
-    color:#ffd6e0;
-    margin-top:8px;
-    font-style:italic;
-    opacity:0;
-    transition: opacity 1s ease-in-out;
-}
-
-/* =====================
-   FOOTER
-===================== */
-.footer{
-    margin-top:18px;
-    font-size:11px;
-    color:#e0f3ff;
-    letter-spacing:1px;
-}
-
-/* =====================
-   HEART
-===================== */
+/* floating hearts (minimal) */
 .heart{
-    position:fixed;
-    top:-30px;
-    transform:rotate(45deg);
-    opacity:.9;
-    animation:
-        fall linear forwards,
-        sway ease-in-out infinite,
-        glow ease-in-out infinite;
-    pointer-events:none;
+  position:fixed;
+  top:-30px; transform:rotate(45deg); opacity:.95;
+  animation:fall linear forwards, sway ease-in-out infinite, glow ease-in-out infinite;
+  pointer-events:none; width:14px; height:14px; border-radius:18px;
 }
+.heart::before,.heart::after{content:""; position:absolute; width:100%; height:100%; background:inherit; border-radius:50%;}
+.heart::before{left:-50%} .heart::after{top:-50%}
+@keyframes fall{to{transform:translateY(120vh) rotate(45deg); opacity:0}}
+@keyframes sway{0%,100%{margin-left:-9px}50%{margin-left:9px}}
+@keyframes glow{0%,100%{box-shadow:0 0 6px currentColor}50%{box-shadow:0 0 16px currentColor}}
 
-.heart::before,
-.heart::after{
-    content:"";
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:inherit;
-    border-radius:50%;
+/* monthiversary / yearly effects (kept subtle & clean) */
+.month-glow, .year-glow{
+  position:fixed; inset:0; pointer-events:none; z-index:60; mix-blend-mode:screen;
 }
-.heart::before{left:-50%;}
-.heart::after{top:-50%;}
+.month-glow{ background: radial-gradient(circle at 30% 30%, rgba(255,123,176,0.10), transparent 25%), radial-gradient(circle at 70% 70%, rgba(143,211,255,0.06), transparent 25%); animation: fadeShort 2.4s ease-out forwards;}
+.year-glow{ background: radial-gradient(circle at 50% 40%, rgba(255,215,0,0.14), transparent 22%), radial-gradient(circle at 20% 80%, rgba(255,185,100,0.06), transparent 22%); animation: fadeShort 3.6s ease-out forwards;}
+@keyframes fadeShort{0%{opacity:0} 30%{opacity:1} 100%{opacity:0}}
 
-@keyframes fall{
-    to{transform:translateY(120vh) rotate(45deg);opacity:0;}
-}
-@keyframes sway{
-    0%,100%{margin-left:-12px;}
-    50%{margin-left:12px;}
-}
-@keyframes glow{
-    0%,100%{box-shadow:0 0 6px currentColor;}
-    50%{box-shadow:0 0 18px currentColor;}
+/* big flash hearts */
+.flash-heart{position:fixed; left:50%; top:48%; transform:translate(-50%,-50%) scale(.3); font-size:96px; opacity:0; animation: flashAnim 1.8s ease-out forwards; z-index:65}
+@keyframes flashAnim{0%{opacity:0; transform:translate(-50%,-50%) scale(.3)}30%{opacity:1; transform:translate(-50%,-50%) scale(1)}100%{opacity:0; transform:translate(-50%,-50%) scale(.4)}}
+
+/* year special text */
+.ann-text{position:fixed; top:62%; left:50%; transform:translateX(-50%); font-size:22px; color:#ffd700; font-weight:700; text-shadow:0 0 8px rgba(255,215,0,0.8); opacity:0; animation: annText 4s ease-out forwards; z-index:66}
+@keyframes annText{0%{opacity:0; transform:translate(-50%,18px)}30%{opacity:1; transform:translate(-50%,0)}100%{opacity:0; transform:translate(-50%,-14px)}}
+
+/* responsive */
+@media (max-width:520px){
+  .names{font-size:22px}
+  .time-big{font-size:26px}
+  .card{padding:20px}
+  .flash-heart{font-size:72px}
 }
 </style>
 </head>
-
 <body>
 
-<div class="card">
-    <div class="box">
-        <h1>🩵 Our Time 🩵</h1>
-        <div class="names">I 🩷 N</div>
-        <div id="timer"></div>
-        <div id="quote">💌 Love you forever 💌</div>
-        <div class="footer">forever &amp; always</div>
+<div class="container">
+  <div class="card" role="main" aria-label="Our Time">
+    <div class="header">
+      <div class="title">
+        <h1>🩵 Our Time</h1>
+        <div class="small-sub">A little page for us</div>
+      </div>
+      <div class="small-sub">since 23 Aug 2025</div>
     </div>
+
+    <!-- NEON NAME -->
+    <div class="names" id="names">I 🩷 N</div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div id="timer" class="timer"><span class="time-big">0 Years 0 Months</span>0 Days together<br>0 Hours 0 Minutes 0 Seconds 💫</div>
+      <div id="quote">💌 Love you forever 💌</div>
+
+      <div class="controls" aria-hidden="false">
+        <button id="toggleMusic" class="btn" title="Play / Pause music">⏯️</button>
+        <button id="muteChime" class="btn" title="Mute month/year chime">🔔</button>
+      </div>
+    </div>
+
+    <div class="footer">forever &amp; always • I 🩷 N</div>
+  </div>
 </div>
 
-<!-- Musik Latar -->
-<audio id="music" loop>
+<!-- AUDIO -->
+<audio id="music" loop preload="auto">
   <source src="PenjagaHati.mp3" type="audio/mpeg">
 </audio>
+<audio id="chime" preload="auto"><source src="chime.mp3" type="audio/mpeg"></audio>
+<audio id="yearChime" preload="auto"><source src="yearChime.mp3" type="audio/mpeg"></audio>
 
 <script>
-// =====================
-// TIMER (WIT)
-// =====================
+/* ===================== TIME ZONE HELPERS ===================== */
+function nowWIT(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"})); }
+
+/* ===================== START DATE (JADIAN) ===================== */
 const startDate = new Date("2025-08-23T19:36:00+09:00");
 
-function nowWIT(){
-    return new Date(
-        new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"})
-    );
-}
-
+/* ===================== TIMER RENDER ===================== */
 function updateTimer(){
-    const now = nowWIT();
-    const diff = now - startDate;
-    const t = document.getElementById("timer");
+  const now = nowWIT();
+  const diff = now - startDate;
+  const t = document.getElementById('timer');
+  if(diff < 0){
+    t.innerHTML = 'Coming soon 💙';
+    return;
+  }
+  const s = new Date(startDate);
+  const e = new Date(now);
 
-    if(diff < 0){
-        t.innerHTML = "Coming soon 💙";
-        return;
-    }
+  let years = e.getFullYear() - s.getFullYear();
+  let months = e.getMonth() - s.getMonth();
+  let days = e.getDate() - s.getDate();
 
-    const s = new Date(startDate);
-    const e = new Date(now);
+  if(days < 0){
+    months--;
+    const daysInPrevMonth = new Date(e.getFullYear(), e.getMonth(), 0).getDate();
+    days += daysInPrevMonth;
+  }
+  if(months < 0){
+    years--;
+    months += 12;
+  }
+  const hours = Math.floor((diff/3600000)%24);
+  const minutes = Math.floor((diff/60000)%60);
+  const seconds = Math.floor((diff/1000)%60);
 
-    let y = e.getFullYear() - s.getFullYear();
-    let m = e.getMonth() - s.getMonth();
-    let d = e.getDate() - s.getDate();
-
-    if(d < 0){
-        m--;
-        d += new Date(e.getFullYear(),e.getMonth(),0).getDate();
-    }
-    if(m < 0){
-        y--;
-        m += 12;
-    }
-
-    const h  = Math.floor((diff/3600000)%24);
-    const mi = Math.floor((diff/60000)%60);
-    const se = Math.floor((diff/1000)%60);
-
-    t.innerHTML = `
-        <span class="time-big">${y} Years ${m} Months</span>
-        ${d} Days together<br>
-        ${h} Hours ${mi} Minutes ${se} Seconds 💫
-    `;
+  t.innerHTML = `<span class="time-big">${years} Years ${months} Months</span>${days} Days together<br>${hours} Hours ${minutes} Minutes ${seconds} Seconds 💫`;
 }
 updateTimer();
 setInterval(updateTimer,1000);
 
-// =====================
-// QUOTES 30 PCS DENGAN FADE
-// =====================
+/* ===================== QUOTES ROTATION ===================== */
 const quotes = [
   "Bersamamu, aku menemukan rumah yang tak tergantikan.",
   "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
   "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
   "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
-  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
-  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
-  "Bersamamu, semua hal biasa jadi luar biasa.",
-  "Cinta kita bukan hanya kata-kata, tapi juga tindakan setiap hari.",
   "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
-  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
-  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
-  "Kamu bukan hanya milikku, tapi aku milikmu sepenuh hati.",
-  "Setiap hari bersamamu adalah hadiah yang tak ternilai.",
-  "Aku ingin menjadi alasan kamu tersenyum setiap pagi.",
-  "Cinta kita tumbuh bukan karena sempurna, tapi karena kita saling memahami.",
-  "Kamu membuat dunia ini lebih indah hanya dengan hadir di sisiku.",
-  "Aku jatuh cinta padamu lagi setiap kali kamu tersenyum padaku.",
-  "Bersamamu, aku belajar arti sabar, setia, dan mencintai tanpa syarat.",
-  "Cinta sejati adalah ketika kamu tetap memilihnya meski tahu kekurangannya.",
-  "Aku mencintaimu dalam diam, tawa, dan setiap napasku.",
-  "Bersamamu, bahkan hari-hari biasa menjadi istimewa.",
-  "Aku ingin memegang tanganmu bukan hanya hari ini, tapi selamanya.",
-  "Cinta kita bukan tentang kata-kata manis, tapi tentang momen yang kita buat bersama.",
-  "Kamu adalah alasan aku percaya pada cinta sejati.",
-  "Bersamamu, aku merasa utuh, tak ada yang kurang.",
-  "Aku memilihmu hari ini, esok, dan selamanya.",
-  "Cinta kita sederhana, tapi tak ternilai harganya.",
-  "Kamu adalah lagu indah yang tak pernah bosan aku dengar.",
-  "Aku bahagia melihatmu bahagia, karena itu membuat hatiku damai.",
-  "Bersamamu, setiap mimpi terasa mungkin."
 ];
-
 let qIndex = 0;
-const quoteEl = document.getElementById("quote");
-
+const quoteEl = document.getElementById('quote');
 function showNextQuote(){
-    quoteEl.style.opacity = 0;
-    setTimeout(()=>{
-        quoteEl.innerText = quotes[qIndex];
-        quoteEl.style.opacity = 1;
-        qIndex = (qIndex + 1) % quotes.length;
-    }, 1000);
+  quoteEl.style.opacity = 0;
+  setTimeout(()=>{
+    quoteEl.textContent = quotes[qIndex];
+    quoteEl.style.opacity = 1;
+    qIndex = (qIndex+1) % quotes.length;
+  }, 700);
 }
-showNextQuote();
-setInterval(showNextQuote, 5000);
+showNextQuote(); setInterval(showNextQuote,5000);
 
-// =====================
-// LOVE JATUH
-// =====================
-const colors = ["#ff5da2","#ff9f43","#feca57","#1dd1a1","#54a0ff","#5f27cd"];
+/* ===================== HEART PARTICLES ===================== */
+const heartColors = ["#ff7bb0","#ff9f6a","#ffd36b","#8fd3ff","#54a0ff","#c77bff"];
+function spawnHeart(x,y,color){
+  const el = document.createElement('div');
+  el.className = 'heart';
+  el.style.left = (x - 8) + 'px';
+  el.style.top = (y - 8) + 'px';
+  el.style.width = (8 + Math.random()*14) + 'px';
+  el.style.height = el.style.width;
+  el.style.background = color || heartColors[Math.floor(Math.random()*heartColors.length)];
+  el.style.opacity = 0.95;
+  const dur = (4 + Math.random()*4).toFixed(2) + 's';
+  el.style.animationDuration = dur + ',' + (2+Math.random()*2) + 's,' + '1.5s';
+  document.body.appendChild(el);
+  setTimeout(()=> el.remove(), 9000);
+}
+setInterval(()=> spawnHeart(Math.random()*window.innerWidth, -20), 700);
+document.addEventListener('click', (e)=> spawnHeart(e.clientX, e.clientY));
 
-setInterval(()=>{
-    createHeart(Math.random()*window.innerWidth, -20);
-},600);
+/* ===================== AUDIO CONTROL (LOCKED MUSIC) ===================== */
+const music = document.getElementById('music');
+const chime = document.getElementById('chime');
+const yearChime = document.getElementById('yearChime');
 
-document.addEventListener("click",(e)=>{
-    createHeart(e.clientX, e.clientY);
+let chimeMuted = false;
+
+/* play music after first user interaction (required by browsers) */
+function startMusicIfNeeded(){
+  music.volume = 1;
+  music.play().catch(()=>{});
+}
+window.addEventListener('click', startMusicIfNeeded, { once: true });
+window.addEventListener('touchstart', startMusicIfNeeded, { once: true });
+
+/* toggle play/pause button */
+const toggleBtn = document.getElementById('toggleMusic');
+toggleBtn.addEventListener('click', ()=>{
+  if(music.paused) music.play().catch(()=>{});
+  else music.pause();
+});
+const muteBtn = document.getElementById('muteChime');
+muteBtn.addEventListener('click', ()=>{
+  chimeMuted = !chimeMuted;
+  muteBtn.textContent = chimeMuted ? '🔕' : '🔔';
 });
 
-function createHeart(x,y){
-    const h = document.createElement("div");
-    h.className = "heart";
-
-    const size  = 10 + Math.random()*16;
-    const color = colors[Math.floor(Math.random()*colors.length)];
-
-    h.style.width  = size+"px";
-    h.style.height = size+"px";
-    h.style.background = color;
-    h.style.color = color;
-    h.style.left = (x - size/2)+"px";
-    h.style.top  = y+"px";
-    h.style.animationDuration =
-        (5+Math.random()*4)+"s,"+
-        (2+Math.random()*2)+"s,"+
-        "1.5s";
-
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),9000);
+/* ensure month/year chimes do not pause or stop music */
+function safePlayAudio(aud){
+  try{
+    aud.currentTime = 0;
+    aud.play().catch(()=>{});
+  }catch(e){}
 }
 
-// =====================
-// AUTOPLAY MUSIK SETELAH KLIK PERTAMA
-// =====================
-const music = document.getElementById("music");
-window.addEventListener("click", ()=>{
-    music.play().catch(()=>console.log("Klik untuk mulai musik."));
-},{once:true});
-</script>
+/* ===================== MONTHIVERSARY & YEAR CHECKERS ===================== */
+let lastTriggeredMonth = -1;
+let lastTriggeredYear = -1;
 
+function checkMonthiversary(){
+  const now = nowWIT();
+  const s = startDate;
+  const monthsTotal = (now.getFullYear()-s.getFullYear())*12 + (now.getMonth()-s.getMonth());
+  if(now.getDate() === s.getDate() && monthsTotal >= 1 && monthsTotal !== lastTriggeredMonth){
+    lastTriggeredMonth = monthsTotal;
+    triggerMonthEffect(monthsTotal);
+  }
+}
+
+function triggerMonthEffect(months){
+  // subtle flash + chime
+  const glow = document.createElement('div');
+  glow.className = 'month-glow';
+  document.body.appendChild(glow);
+  setTimeout(()=> glow.remove(), 2400);
+
+  const fh = document.createElement('div');
+  fh.className = 'flash-heart';
+  fh.innerHTML = '💗';
+  document.body.appendChild(fh);
+  setTimeout(()=> fh.remove(), 1800);
+
+  if(!chimeMuted) safePlayAudio(chime);
+}
+
+/* YEARLY */
+function checkYearAnniversary(){
+  const now = nowWIT();
+  const s = startDate;
+  const years = now.getFullYear() - s.getFullYear();
+  if(now.getDate() === s.getDate() && now.getMonth() === s.getMonth() && years >= 1 && years !== lastTriggeredYear){
+    lastTriggeredYear = years;
+    triggerYearEffect(years);
+  }
+}
+
+function triggerYearEffect(years){
+  // golden glow + big heart + text + golden hearts
+  const g = document.createElement('div');
+  g.className = 'year-glow';
+  document.body.appendChild(g);
+  setTimeout(()=> g.remove(), 3600);
+
+  const big = document.createElement('div');
+  big.className = 'flash-heart';
+  big.innerHTML = '💛';
+  document.body.appendChild(big);
+  setTimeout(()=> big.remove(), 3000);
+
+  const txt = document.createElement('div');
+  txt.className = 'ann-text';
+  txt.innerHTML = `Happy ${years} Year Anniversary ❤️`;
+  document.body.appendChild(txt);
+  setTimeout(()=> txt.remove(), 3800);
+
+  if(!chimeMuted) safePlayAudio(yearChime);
+
+  // spawn golden hearts
+  for(let i=0;i<40;i++){
+    setTimeout(()=> spawnHeart(Math.random()*window.innerWidth, Math.random()*160, '#ffd166'), i*60);
+  }
+}
+
+/* poll checks (every 3s is fine) */
+setInterval(checkMonthiversary, 3000);
+setInterval(checkYearAnniversary, 3000);
+
+/* ===================== AUTO-TYPING (small monthly message when triggered) ===================== */
+function typeMessage(text){
+  const box = document.createElement('div');
+  box.style.position = 'fixed';
+  box.style.left = '50%';
+  box.style.bottom = '28px';
+  box.style.transform = 'translateX(-50%)';
+  box.style.background = 'rgba(255,255,255,0.03)';
+  box.style.backdropFilter = 'blur(8px)';
+  box.style.padding = '10px 16px';
+  box.style.borderRadius = '12px';
+  box.style.fontSize = '15px';
+  box.style.color = '#fff';
+  box.style.zIndex = 70;
+  document.body.appendChild(box);
+  let i=0;
+  const id = setInterval(()=>{
+    box.textContent = text.slice(0,i);
+    i++;
+    if(i>text.length){ clearInterval(id); setTimeout(()=> box.remove(), 3500); }
+  }, 50);
+}
+
+/* attach small trigger for demo/testing (remove in production) */
+// Example: when month triggers we can call typeMessage
+// In triggerMonthEffect() you can add: typeMessage(`Happy ${months} months, my love 💕`)
+// In triggerYearEffect() you can add: typeMessage(`Happy ${years} years! 🎉`)
+
+/* ===================== SAFE-LOAD: ensure music not interrupted by other actions ===================== */
+/* if some other script pauses, keep a gentle watchdog (doesn't force-play if user paused intentionally) */
+let userPaused = false;
+music.addEventListener('pause', ()=> { if(!userPaused) {/* userPaused false => likely user paused manually; don't auto-restart */} });
+toggleBtn.addEventListener('click', ()=> { userPaused = music.paused; });
+
+/* ===================== INITIAL CLEANUP / READY ===================== */
+document.addEventListener('visibilitychange', ()=>{
+  if(document.hidden) return;
+  // refresh timer quickly on tab focus
+  updateTimer();
+});
+
+/* Optionally show a little welcome typing once when page opened after music starts */
+window.addEventListener('load', ()=> {
+  // subtle entrance animation for names
+  const n = document.getElementById('names');
+  n.style.opacity = 0;
+  n.style.transform = 'translateY(6px)';
+  setTimeout(()=> { n.style.transition = 'opacity .9s ease, transform .9s ease'; n.style.opacity = 1; n.style.transform = 'translateY(0)'; }, 200);
+});
+
+</script>
 </body>
 </html>
