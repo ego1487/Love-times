@@ -5,60 +5,70 @@
 <title>Lama Hubungan</title>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #000;
-        color: white;
-        font-family: Arial, sans-serif;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
 
-    /* Konten tengah */
-    .content {
-        position: relative;
-        z-index: 10;
-        height: 100vh;
+/* Teks tengah */
+.content {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
 
-    h1 {
-        font-size: 32px;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-    }
+#timer {
+    font-size: 24px;
+}
 
-    #timer {
-        font-size: 24px;
-        line-height: 1.6;
-    }
+/* ❤️ LOVE CSS */
+.heart {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: red;
+    transform: rotate(45deg);
+    top: -20px;
+    animation: fall 6s linear forwards;
+}
 
-    /* ❤️ Love jatuh */
-    .heart {
-        position: fixed;
-        top: -50px;
-        font-size: 22px;
-        animation: fall linear infinite, spin linear infinite;
-        opacity: 0.85;
-        user-select: none;
-        pointer-events: none;
-        z-index: 1;
-    }
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+}
 
-    @keyframes fall {
-        from { transform: translateY(-50px); }
-        to { transform: translateY(120vh); }
-    }
+.heart::before {
+    left: -10px;
+}
 
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+.heart::after {
+    top: -10px;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(120vh) rotate(45deg);
+        opacity: 0;
     }
+}
 </style>
 </head>
 
@@ -70,19 +80,60 @@
 </div>
 
 <script>
-    // Tanggal mulai (WIT)
-    const startDate = new Date("2025-08-23T19:36:00+09:00");
+/* TIMER */
+const startDate = new Date("2025-08-23T19:36:00+09:00");
 
-    function updateTimer() {
-        const now = new Date(
-            new Date().toLocaleString("en-US", { timeZone: "Asia/Jayapura" })
-        );
+function updateTimer() {
+    const now = new Date(
+        new Date().toLocaleString("en-US", { timeZone: "Asia/Jayapura" })
+    );
 
-        let diff = now - startDate;
+    let diff = now - startDate;
+    if (diff < 0) {
+        timer.innerHTML = "Menunggu hari spesial ❤️";
+        return;
+    }
 
-        // Jika waktu belum lewat
-        if (diff < 0) {
-            document.getElementById("timer").innerHTML =
+    let s = new Date(startDate);
+    let e = new Date(now);
+
+    let y = e.getFullYear() - s.getFullYear();
+    let m = e.getMonth() - s.getMonth();
+    let d = e.getDate() - s.getDate();
+
+    if (d < 0) {
+        m--;
+        d += new Date(e.getFullYear(), e.getMonth(), 0).getDate();
+    }
+    if (m < 0) {
+        y--;
+        m += 12;
+    }
+
+    let h = Math.floor((diff / 3600000) % 24);
+    let mi = Math.floor((diff / 60000) % 60);
+    let sc = Math.floor((diff / 1000) % 60);
+
+    timer.innerHTML =
+        `${y} tahun, ${m} bulan, ${d} hari<br>
+        ${h} jam ${mi} menit ${sc} detik`;
+}
+updateTimer();
+setInterval(updateTimer, 1000);
+
+/* LOVE SPAWN */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.background = ["#ff3366","#ff0055","#ff3399"][Math.floor(Math.random()*3)];
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>            document.getElementById("timer").innerHTML =
                 "Menunggu hari spesial ❤️";
             return;
         }
