@@ -6,49 +6,56 @@
 <title>Our Time</title>
 
 <style>
-/* =====================
-   BASE
-===================== */
-body{
-    margin:0;
-    min-height:100vh;
-    font-family:"Segoe UI",Arial,sans-serif;
-    color:#fff;
-    overflow:hidden;
-    background:
-        linear-gradient(rgba(0,0,30,.65),rgba(0,0,30,.65)),
-        url("bg.jpg") center/110% no-repeat fixed;
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #fff;
+    overflow: hidden;
+    background: linear-gradient(rgba(0,0,30,0.65), rgba(0,0,30,0.65)),
+                url("bg.jpg") center/110% no-repeat fixed;
     animation: zoomBg 20s ease-in-out infinite alternate;
 }
-@keyframes zoomBg{0%{background-size:110%;}100%{background-size:120%;}}
 
-/* =====================
-   CARD
-===================== */
-.card{min-height:100vh; display:grid; place-items:center;}
-.box{
-    width:min(92%,360px);
-    padding:32px 26px;
-    border-radius:22px;
-    text-align:center;
-    background:rgba(0,0,0,.35);
-    backdrop-filter:blur(18px);
-    box-shadow:0 0 45px rgba(120,190,255,.35);
-    animation:pulse 3s ease-in-out infinite;
+@keyframes zoomBg {
+    0% { background-size: 110%; }
+    100% { background-size: 120%; }
 }
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
 
-/* TITLE */
-h1{margin:0; font-size:26px; letter-spacing:2px; text-transform:uppercase;}
+.card {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
 
-/* =====================
-   NAMES (NEON GLOW)
-===================== */
-.names{
-    font-size:15px;
-    margin:10px 0 16px;
-    color:#ffb6d9;
-    font-weight:600;
+.box {
+    width: min(92%, 360px);
+    padding: 32px 26px;
+    border-radius: 22px;
+    text-align: center;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 45px rgba(120,190,255,0.35);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+h1 {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.names {
+    font-size: 15px;
+    margin: 10px 0 16px;
+    color: #ffb6d9;
+    font-weight: 600;
     text-shadow:
         0 0 6px #ff7fbc,
         0 0 12px #ff7fbc,
@@ -56,46 +63,109 @@ h1{margin:0; font-size:26px; letter-spacing:2px; text-transform:uppercase;}
         0 0 35px #ff92c8;
 }
 
-/* =====================
-   TIMER
-===================== */
-#timer{font-size:18px; line-height:1.6;}
-.time-big{display:block; font-size:28px; font-weight:700; color:#8fd3ff; margin-bottom:6px;}
-
-/* =====================
-   QUOTES
-===================== */
-#quote{font-size:14px; color:#ffd6e0; margin-top:8px; font-style:italic; opacity:0; transition: opacity 1s ease-in-out;}
-
-/* =====================
-   FOOTER
-===================== */
-.footer{margin-top:18px; font-size:11px; color:#e0f3ff; letter-spacing:1px;}
-
-/* =====================
-   HEART FALL
-===================== */
-.heart{
-    position:fixed;
-    top:-30px;
-    transform:rotate(45deg);
-    opacity:.9;
-    animation:fall linear forwards, sway ease-in-out infinite, glow ease-in-out infinite;
-    pointer-events:none;
+#timer {
+    font-size: 18px;
+    line-height: 1.6;
 }
-.heart::before,.heart::after{
-    content:"";
-    position:absolute;
-    width:100%; height:100%;
-    background:inherit;
-    border-radius:50%;
-}
-.heart::before{left:-50%;}
-.heart::after{top:-50%;}
 
-@keyframes fall{to{transform:translateY(120vh) rotate(45deg);opacity:0;}}
-@keyframes sway{0%,100%{margin-left:-12px;}50%{margin-left:12px;}}
-@keyframes glow{0%,100%{box-shadow:0 0 6px currentColor;}50%{box-shadow:0 0 18px currentColor;}}
+.time-big {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #8fd3ff;
+    margin-bottom: 6px;
+}
+
+#quote {
+    font-size: 14px;
+    color: #ffd6e0;
+    margin-top: 8px;
+    font-style: italic;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.footer {
+    margin-top: 18px;
+    font-size: 11px;
+    color: #e0f3ff;
+    letter-spacing: 1px;
+}
+
+/* HEARTS */
+.heart {
+    position: fixed;
+    top: -30px;
+    transform: rotate(45deg);
+    opacity: 0.9;
+    animation: fall linear forwards, sway ease-in-out infinite, glow ease-in-out infinite;
+    pointer-events: none;
+}
+.heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: 50%;
+}
+.heart::before { left: -50%; }
+.heart::after { top: -50%; }
+
+@keyframes fall { to { transform: translateY(120vh) rotate(45deg); opacity: 0; } }
+@keyframes sway { 0%, 100% { margin-left: -12px; } 50% { margin-left: 12px; } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 6px currentColor; } 50% { box-shadow: 0 0 18px currentColor; } }
+
+/* =======================
+   MAWAR + ANGIN
+======================= */
+.rose-wrapper {
+    position: fixed;
+    bottom: 55px;
+    right: 20px;
+    width: 85px;
+    height: 140px;
+    pointer-events: none;
+    transform-origin: bottom center;
+    animation: gentleWind 4.5s ease-in-out infinite;
+    transition: transform 1.6s ease, filter 1.6s ease;
+    transform: scale(var(--bloomScale));
+}
+
+.bloom-0 { --bloomScale: 0.50; }
+.bloom-1 { --bloomScale: 0.65; }
+.bloom-2 { --bloomScale: 0.80; }
+.bloom-3 { --bloomScale: 0.95; }
+.bloom-4 { --bloomScale: 1.10; }
+.bloom-5 { --bloomScale: 1.25; }
+.bloom-6 { --bloomScale: 1.40; }
+.bloom-7 { --bloomScale: 1.55; }
+.bloom-8 { --bloomScale: 1.70; }
+
+.full-bloom {
+    --bloomScale: 2.0;
+    filter: drop-shadow(0 0 10px #ff003c);
+}
+
+@keyframes gentleWind {
+    0%   { transform: rotate(0deg) scale(var(--bloomScale)); }
+    50%  { transform: rotate(4deg) scale(var(--bloomScale)); }
+    100% { transform: rotate(0deg) scale(var(--bloomScale)); }
+}
+
+/* =======================
+   KELOPAK BERDENYUT
+======================= */
+@keyframes petalPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.07); }
+}
+
+.petal-pulse {
+    animation: petalPulse 2.8s ease-in-out infinite;
+    transform-origin: center;
+}
+
 </style>
 </head>
 
@@ -104,37 +174,30 @@ h1{margin:0; font-size:26px; letter-spacing:2px; text-transform:uppercase;}
 <div class="card">
     <div class="box">
         <h1>🩵 Our Time 🩵</h1>
-
         <div class="names">I 🩷 N</div>
-
         <div id="timer"></div>
-
         <div id="quote">💌 Love you forever 💌</div>
-
         <div class="footer">forever & always</div>
     </div>
 </div>
 
-<!-- Musik -->
 <audio id="music" preload="auto" loop>
-  <source src="penjagaHati.mp3" type="audio/mpeg">
+    <source src="penjagaHati.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// =====================
-// TIMER
 const startDate = new Date("2025-08-23T19:36:00+09:00");
 
-function nowWIT(){
-    return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Jayapura"}));
+function nowWIT() {
+    return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Jayapura" }));
 }
 
-function updateTimer(){
+function updateTimer() {
     const now = nowWIT();
     const diff = now - startDate;
     const t = document.getElementById("timer");
 
-    if(diff < 0){
+    if (diff < 0) {
         t.innerHTML = "Coming soon 💙";
         return;
     }
@@ -142,16 +205,16 @@ function updateTimer(){
     const s = new Date(startDate);
     const e = new Date(now);
 
-    let y = e.getFullYear()-s.getFullYear();
-    let m = e.getMonth()-s.getMonth();
-    let d = e.getDate()-s.getDate();
+    let y = e.getFullYear() - s.getFullYear();
+    let m = e.getMonth() - s.getMonth();
+    let d = e.getDate() - s.getDate();
 
-    if(d<0){ m--; d += new Date(e.getFullYear(),e.getMonth(),0).getDate(); }
-    if(m<0){ y--; m+=12; }
+    if (d < 0) { m--; d += new Date(e.getFullYear(), e.getMonth(), 0).getDate(); }
+    if (m < 0) { y--; m += 12; }
 
-    const h = Math.floor((diff/3600000)%24);
-    const mi = Math.floor((diff/60000)%60);
-    const se = Math.floor((diff/1000)%60);
+    const h = Math.floor((diff / 3600000) % 24);
+    const mi = Math.floor((diff / 60000) % 60);
+    const se = Math.floor((diff / 1000) % 60);
 
     t.innerHTML = `
         <span class="time-big">${y} Years ${m} Months</span>
@@ -159,77 +222,123 @@ function updateTimer(){
         ${h} Hours ${mi} Minutes ${se} Seconds 💫
     `;
 }
-
 updateTimer();
-setInterval(updateTimer,1000);
+setInterval(updateTimer, 1000);
 
-// =====================
-// QUOTES
 const quotes = [
-  "Bersamamu, aku menemukan rumah yang tak tergantikan.",
-  "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
-  "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
-  "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
-  "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
-  "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
-  "Bersamamu, semua hal biasa jadi luar biasa.",
-  "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
-  "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
-  "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan.",
+    "Bersamamu, aku menemukan rumah yang tak tergantikan.",
+    "Kamu bukan hanya pacarku, tapi sahabat terbaik dan rumah hatiku.",
+    "Setiap detik bersamamu adalah cerita yang ingin aku ulang terus.",
+    "Cinta kita sederhana tapi nyata, dan itu yang membuatnya indah.",
+    "Aku mencintaimu bukan karena sempurna, tapi karena aku merasa sempurna bersamamu.",
+    "Kamu adalah alasan aku tersenyum di hari-hari sulit.",
+    "Bersamamu, semua hal biasa jadi luar biasa.",
+    "Aku ingin tua bersamamu, menikmati setiap senja dan tawa kita.",
+    "Kamu membuat hatiku tenang, seperti pulang setelah perjalanan panjang.",
+    "Dalam pelukanmu, aku menemukan damai yang tak bisa dijelaskan."
 ];
+
 let qIndex = 0;
 const quoteEl = document.getElementById("quote");
 
-function showNextQuote(){
+function showNextQuote() {
     quoteEl.style.opacity = 0;
-    setTimeout(()=>{
+    setTimeout(() => {
         quoteEl.innerText = quotes[qIndex];
         quoteEl.style.opacity = 1;
-        qIndex = (qIndex+1) % quotes.length;
-    },1000);
+        qIndex = (qIndex + 1) % quotes.length;
+    }, 1000);
 }
 showNextQuote();
 setInterval(showNextQuote, 5000);
 
-// =====================
-// HEART RAIN
-const colors = ["#ff5da2","#ff9f43","#feca57","#1dd1a1","#54a0ff","#5f27cd"];
+const colors = ["#ff5da2", "#ff9f43", "#feca57", "#1dd1a1", "#54a0ff", "#5f27cd"];
 
-setInterval(()=>{
-    createHeart(Math.random()*window.innerWidth, -20);
-},600);
+setInterval(() => {
+    createHeart(Math.random() * window.innerWidth, -20);
+}, 600);
 
-document.addEventListener("click",(e)=>{
-    createHeart(e.clientX,e.clientY);
+document.addEventListener("click", (e) => {
+    createHeart(e.clientX, e.clientY);
 });
 
-function createHeart(x,y){
+function createHeart(x, y) {
     const h = document.createElement("div");
     h.className = "heart";
-    const size = 10+Math.random()*16;
-    const color = colors[Math.floor(Math.random()*colors.length)];
-    h.style.width = size+"px";
-    h.style.height = size+"px";
+    const size = 10 + Math.random() * 16;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    h.style.width = size + "px";
+    h.style.height = size + "px";
     h.style.background = color;
-    h.style.color = color;
-    h.style.left = (x-size/2)+"px";
-    h.style.top = y+"px";
-    h.style.animationDuration = (5+Math.random()*4)+"s,"+(2+Math.random()*2)+"s,1.5s";
+    h.style.left = (x - size / 2) + "px";
+    h.style.top = y + "px";
+    h.style.animationDuration = (5 + Math.random() * 4) + "s," +
+                                 (2 + Math.random() * 2) + "s," +
+                                 "1.5s";
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),9000);
+    setTimeout(() => h.remove(), 9000);
 }
 
-// =====================
-// AUTOPLAY MUSIC (FIX)
 const music = document.getElementById("music");
 music.volume = 1;
 
-function startMusic(){
-    music.play().catch(()=>{});
+function startMusic() {
+    music.play().catch(() => {});
 }
-window.addEventListener("click", startMusic, {once:true});
-window.addEventListener("touchstart", startMusic, {once:true});
+window.addEventListener("click", startMusic, { once: true });
+window.addEventListener("touchstart", startMusic, { once: true });
+
+function updateRoseBloom() {
+    const now = nowWIT();
+    const diff = now - startDate;
+
+    if (diff < 0) return;
+
+    const s = new Date(startDate);
+    const e = new Date(now);
+
+    let y = e.getFullYear() - s.getFullYear();
+    let m = e.getMonth() - s.getMonth();
+    let d = e.getDate() - s.getDate();
+
+    if (d < 0) m--;
+    if (m < 0) y--;
+
+    const rose = document.querySelector(".rose-wrapper");
+
+    if (y < 9) {
+        rose.className = "rose-wrapper bloom-" + y;
+    } else {
+        rose.className = "rose-wrapper full-bloom";
+    }
+}
+
+updateRoseBloom();
+setInterval(updateRoseBloom, 2000);
 </script>
 
+<div class="rose-wrapper">
+  <svg id="rose" width="85" height="140" viewBox="0 0 100 160">
+
+    <path class="petal-pulse"
+          d="M50 20 C70 10, 90 40, 50 70 C10 40, 30 10, 50 20Z"
+          fill="#d4143d" stroke="#a60f30" stroke-width="2" />
+
+    <path class="petal-pulse"
+          d="M40 25 C10 40, 20 70, 48 68 C35 50, 30 35, 40 25Z"
+          fill="#e31f4a" />
+
+    <path class="petal-pulse"
+          d="M60 25 C90 40, 80 70, 52 68 C65 50, 70 35, 60 25Z"
+          fill="#e31f4a" />
+
+    <rect x="48" y="70" width="4" height="70" fill="#0c8f39" />
+
+    <path d="M48 100 C20 90, 20 110, 48 110Z" fill="#1bbf55"/>
+    <path d="M52 100 C80 90, 80 110, 52 110Z" fill="#1bbf55"/>
+
+  </svg>
+</div>
+
 </body>
-</html>
+   </html>
